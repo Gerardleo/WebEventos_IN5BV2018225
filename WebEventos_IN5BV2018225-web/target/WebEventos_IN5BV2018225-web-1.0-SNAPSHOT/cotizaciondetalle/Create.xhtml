@@ -1,0 +1,41 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml"
+      xmlns:ui="http://xmlns.jcp.org/jsf/facelets"
+      xmlns:h="http://xmlns.jcp.org/jsf/html"
+      xmlns:f="http://xmlns.jcp.org/jsf/core"
+      xmlns:p="http://primefaces.org/ui">
+
+    <ui:composition>
+
+        <p:dialog id="CotizaciondetalleCreateDlg" widgetVar="CotizaciondetalleCreateDialog" modal="true" resizable="false" appendTo="@(body)" header="#{bundle.CreateCotizaciondetalleTitle}">
+            <h:form id="CotizaciondetalleCreateForm">
+                <h:panelGroup id="display">
+                    <p:panelGrid columns="2" rendered="#{cotizaciondetalleController.selected != null}">
+                        <p:outputLabel value="#{bundle.CreateCotizaciondetalleLabel_idcotizaciondetalle}" for="idcotizaciondetalle" />
+                        <p:inputText id="idcotizaciondetalle" value="#{cotizaciondetalleController.selected.idcotizaciondetalle}" title="#{bundle.CreateCotizaciondetalleTitle_idcotizaciondetalle}" required="true" requiredMessage="#{bundle.CreateCotizaciondetalleRequiredMessage_idcotizaciondetalle}"/>
+                        <p:outputLabel value="#{bundle.CreateCotizaciondetalleLabel_preciofacturacion}" for="preciofacturacion" />
+                        <p:inputText id="preciofacturacion" value="#{cotizaciondetalleController.selected.preciofacturacion}" title="#{bundle.CreateCotizaciondetalleTitle_preciofacturacion}" required="true" requiredMessage="#{bundle.CreateCotizaciondetalleRequiredMessage_preciofacturacion}"/>
+                        <p:outputLabel value="#{bundle.CreateCotizaciondetalleLabel_precioventa}" for="precioventa" />
+                        <p:inputText id="precioventa" value="#{cotizaciondetalleController.selected.precioventa}" title="#{bundle.CreateCotizaciondetalleTitle_precioventa}" required="true" requiredMessage="#{bundle.CreateCotizaciondetalleRequiredMessage_precioventa}"/>
+                        <p:outputLabel value="#{bundle.CreateCotizaciondetalleLabel_idcotizacion}" for="idcotizacion" />
+                        <p:selectOneMenu id="idcotizacion" value="#{cotizaciondetalleController.selected.idcotizacion}" required="true" requiredMessage="#{bundle.EditCotizaciondetalleRequiredMessage_idcotizacion}">
+                            <f:selectItems value="#{cotizacionController.itemsAvailableSelectOne}"
+                                           var="idcotizacionItem"
+                                           itemValue="#{idcotizacionItem}"/>
+                        </p:selectOneMenu>
+                        <p:outputLabel value="#{bundle.CreateCotizaciondetalleLabel_idproductos}" for="idproductos" />
+                        <p:selectOneMenu id="idproductos" value="#{cotizaciondetalleController.selected.idproductos}" required="true" requiredMessage="#{bundle.EditCotizaciondetalleRequiredMessage_idproductos}">
+                            <f:selectItems value="#{productosController.itemsAvailableSelectOne}"
+                                           var="idproductosItem"
+                                           itemValue="#{idproductosItem}"/>
+                        </p:selectOneMenu>
+                    </p:panelGrid>
+                    <p:commandButton actionListener="#{cotizaciondetalleController.create}" value="#{bundle.Save}" update="display,:CotizaciondetalleListForm:datalist,:growl" oncomplete="handleSubmit(args,'CotizaciondetalleCreateDialog');"/>
+                    <p:commandButton value="#{bundle.Cancel}" onclick="CotizaciondetalleCreateDialog.hide()"/>
+                </h:panelGroup>
+            </h:form>
+        </p:dialog>
+
+    </ui:composition>
+</html>

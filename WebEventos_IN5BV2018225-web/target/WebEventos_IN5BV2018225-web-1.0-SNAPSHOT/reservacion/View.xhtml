@@ -1,0 +1,42 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml"
+      xmlns:ui="http://xmlns.jcp.org/jsf/facelets"
+      xmlns:h="http://xmlns.jcp.org/jsf/html"
+      xmlns:f="http://xmlns.jcp.org/jsf/core"
+      xmlns:p="http://primefaces.org/ui">
+
+    <ui:composition>
+
+        <p:dialog id="ReservacionViewDlg" widgetVar="ReservacionViewDialog" modal="true" resizable="false" appendTo="@(body)" header="#{bundle.ViewReservacionTitle}">
+            <h:form id="ReservacionViewForm">
+                <h:panelGroup id="display">
+                    <p:panelGrid columns="2" rendered="#{reservacionController.selected != null}">
+                        <h:outputText value="#{bundle.ViewReservacionLabel_idreservacion}"/>
+                        <h:outputText value="#{reservacionController.selected.idreservacion}" title="#{bundle.ViewReservacionTitle_idreservacion}"/>
+                        <h:outputText value="#{bundle.ViewReservacionLabel_lugarReservacion}"/>
+                        <h:outputText value="#{reservacionController.selected.lugarReservacion}" title="#{bundle.ViewReservacionTitle_lugarReservacion}"/>
+                        <h:outputText value="#{bundle.ViewReservacionLabel_salon}"/>
+                        <h:outputText value="#{reservacionController.selected.salon}" title="#{bundle.ViewReservacionTitle_salon}"/>
+                        <h:outputText value="#{bundle.ViewReservacionLabel_horainicio}"/>
+                        <h:outputText value="#{reservacionController.selected.horainicio}" title="#{bundle.ViewReservacionTitle_horainicio}">
+                            <f:convertDateTime pattern="MM/dd/yyyy HH:mm:ss" />
+                        </h:outputText>
+                        <h:outputText value="#{bundle.ViewReservacionLabel_horafin}"/>
+                        <h:outputText value="#{reservacionController.selected.horafin}" title="#{bundle.ViewReservacionTitle_horafin}">
+                            <f:convertDateTime pattern="MM/dd/yyyy HH:mm:ss" />
+                        </h:outputText>
+                        <h:outputText value="#{bundle.ViewReservacionLabel_idtipoevento}"/>
+                        <h:outputText value="#{reservacionController.selected.idtipoevento}" title="#{bundle.ViewReservacionTitle_idtipoevento}"/>
+                        <h:outputText value="#{bundle.ViewReservacionLabel_idcliente}"/>
+                        <h:outputText value="#{reservacionController.selected.idcliente}" title="#{bundle.ViewReservacionTitle_idcliente}"/>
+                        <h:outputText value="#{bundle.ViewReservacionLabel_tipoevento}"/>
+                        <h:outputText value="#{reservacionController.selected.tipoevento}" title="#{bundle.ViewReservacionTitle_tipoevento}"/>
+                    </p:panelGrid>
+                    <p:commandButton value="#{bundle.Close}" onclick="ReservacionViewDialog.hide()"/>
+                </h:panelGroup>
+            </h:form>
+        </p:dialog>
+
+    </ui:composition>
+</html>

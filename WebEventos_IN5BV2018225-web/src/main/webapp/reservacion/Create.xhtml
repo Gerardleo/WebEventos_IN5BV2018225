@@ -1,0 +1,47 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml"
+      xmlns:ui="http://xmlns.jcp.org/jsf/facelets"
+      xmlns:h="http://xmlns.jcp.org/jsf/html"
+      xmlns:f="http://xmlns.jcp.org/jsf/core"
+      xmlns:p="http://primefaces.org/ui">
+
+    <ui:composition>
+
+        <p:dialog id="ReservacionCreateDlg" widgetVar="ReservacionCreateDialog" modal="true" resizable="false" appendTo="@(body)" header="#{bundle.CreateReservacionTitle}">
+            <h:form id="ReservacionCreateForm">
+                <h:panelGroup id="display">
+                    <p:panelGrid columns="2" rendered="#{reservacionController.selected != null}">
+                        <p:outputLabel value="#{bundle.CreateReservacionLabel_idreservacion}" for="idreservacion" />
+                        <p:inputText id="idreservacion" value="#{reservacionController.selected.idreservacion}" title="#{bundle.CreateReservacionTitle_idreservacion}" required="true" requiredMessage="#{bundle.CreateReservacionRequiredMessage_idreservacion}"/>
+                        <p:outputLabel value="#{bundle.CreateReservacionLabel_lugarReservacion}" for="lugarReservacion" />
+                        <p:inputText id="lugarReservacion" value="#{reservacionController.selected.lugarReservacion}" title="#{bundle.CreateReservacionTitle_lugarReservacion}" required="true" requiredMessage="#{bundle.CreateReservacionRequiredMessage_lugarReservacion}"/>
+                        <p:outputLabel value="#{bundle.CreateReservacionLabel_salon}" for="salon" />
+                        <p:inputText id="salon" value="#{reservacionController.selected.salon}" title="#{bundle.CreateReservacionTitle_salon}" required="true" requiredMessage="#{bundle.CreateReservacionRequiredMessage_salon}"/>
+                        <p:outputLabel value="#{bundle.CreateReservacionLabel_horainicio}" for="horainicio" />
+                        <p:calendar id="horainicio" pattern="MM/dd/yyyy HH:mm:ss" value="#{reservacionController.selected.horainicio}" title="#{bundle.EditReservacionTitle_horainicio}" required="true" requiredMessage="#{bundle.EditReservacionRequiredMessage_horainicio}" showOn="button"/>
+                        <p:outputLabel value="#{bundle.CreateReservacionLabel_horafin}" for="horafin" />
+                        <p:calendar id="horafin" pattern="MM/dd/yyyy HH:mm:ss" value="#{reservacionController.selected.horafin}" title="#{bundle.EditReservacionTitle_horafin}" required="true" requiredMessage="#{bundle.EditReservacionRequiredMessage_horafin}" showOn="button"/>
+                        <p:outputLabel value="#{bundle.CreateReservacionLabel_idtipoevento}" for="idtipoevento" />
+                        <p:inputText id="idtipoevento" value="#{reservacionController.selected.idtipoevento}" title="#{bundle.CreateReservacionTitle_idtipoevento}" />
+                        <p:outputLabel value="#{bundle.CreateReservacionLabel_idcliente}" for="idcliente" />
+                        <p:selectOneMenu id="idcliente" value="#{reservacionController.selected.idcliente}" required="true" requiredMessage="#{bundle.EditReservacionRequiredMessage_idcliente}">
+                            <f:selectItems value="#{clienteController.itemsAvailableSelectOne}"
+                                           var="idclienteItem"
+                                           itemValue="#{idclienteItem}"/>
+                        </p:selectOneMenu>
+                        <p:outputLabel value="#{bundle.CreateReservacionLabel_tipoevento}" for="tipoevento" />
+                        <p:selectOneMenu id="tipoevento" value="#{reservacionController.selected.tipoevento}" required="true" requiredMessage="#{bundle.EditReservacionRequiredMessage_tipoevento}">
+                            <f:selectItems value="#{tipoeventoController.itemsAvailableSelectOne}"
+                                           var="tipoeventoItem"
+                                           itemValue="#{tipoeventoItem}"/>
+                        </p:selectOneMenu>
+                    </p:panelGrid>
+                    <p:commandButton actionListener="#{reservacionController.create}" value="#{bundle.Save}" update="display,:ReservacionListForm:datalist,:growl" oncomplete="handleSubmit(args,'ReservacionCreateDialog');"/>
+                    <p:commandButton value="#{bundle.Cancel}" onclick="ReservacionCreateDialog.hide()"/>
+                </h:panelGroup>
+            </h:form>
+        </p:dialog>
+
+    </ui:composition>
+</html>
